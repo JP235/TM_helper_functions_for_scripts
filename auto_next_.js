@@ -186,10 +186,12 @@ function getDocHeight() {
       D.body.clientHeight, D.documentElement.clientHeight
   );
 }
-var targetProxy = new Proxy(t, {
-  set: function (target, key, value) {
-      console.log(`${key} set to ${value}`);
-      target[key] = value;
-      return true;
-  }
-});
+
+// t = {}
+// var targetProxy = new Proxy(t, {
+//   set: function (target, key, value) {
+//       console.log(`${key} set to ${value}`);
+//       target[key] = value;
+//       return true;
+//   }
+// });
