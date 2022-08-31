@@ -10,21 +10,7 @@ const chars = [42, //*
                // 8220,8221, // “ ”
               ]
 
-const lonely_ = ['☜',
-                  "[","]","(",")",". [",".]",
-                  "“...","...”","‘...","...’","\"...","...\"",
-                  "“…","…”","‘…","…’",
-                  ".",","," ."," ,",". ",", ",
-                  "“","”"," “"," ”","“ ","” ",
-                  "'"," '","' ",
-                  "`",
-                  "‘","’"," ‘"," ’", "‘ ","’ ",
-                  ".”",".’",".‘",".'",".\"","\".",
-                  "\""," \"","\" ",
-                  "—"," —","— ",
-                  '!',' !','! ',
-                  '?',' ?','? ',
-                ]
+
 
 const wordPlusLower = (m) => {
     return [m.substring(0,m.length-2),m[m.length-1].toLowerCase()].join('')}
@@ -135,7 +121,29 @@ function delAll(na){
         all_na[i].remove();
         };
 }
+const ssplay = document.createElement("span")
+ssplay.setAttribute("class","glyphicon glyphicon-play")
 
+const sspause = document.createElement("span")
+sspause.setAttribute("class","glyphicon glyphicon-stop")
+
+function makeButton(){
+    var bton0 = document.createElement("a");
+    bton0.setAttribute("class","btn btn-success");
+
+    bton0.style.width = "45px"
+    bton0.style.marginRight = "5px"
+
+
+    var spanText = document.createElement("span")
+    spanText.setAttribute("class","hidden-xs")
+    // spanText.innerHTML = "ON"
+
+    bton0.appendChild(spanText)
+    bton0.appendChild(ssplay)
+    bton0.setAttribute("id","Toggle auto-next");
+    return bton0
+}
 // function getDocHeight() {
 //   var D = document;
 //   return Math.max(
