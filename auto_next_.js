@@ -10,21 +10,65 @@ const chars = [
 	// 8220,8221, // “ ”
 ];
 
-const lonely_ = ['☜',
-                  "[","]","(",")",". [",".]",
-                  "“...","...”","‘...","...’","\"...","...\"",
-                  "“…","…”","‘…","…’",
-                  ".",","," ."," ,",". ",", ",
-                  "“","”"," “"," ”","“ ","” ",
-                  "'"," '","' ",
-                  "`",
-                  "‘","’"," ‘"," ’", "‘ ","’ ",
-                  ".”",".’",".‘",".'",".\"","\".",
-                  "\""," \"","\" ",
-                  "—"," —","— ",
-                  '!',' !','! ',
-                  '?',' ?','? ',
-                ]
+const lonely_ = [
+	"☜",
+	"[",
+	"]",
+	"(",
+	")",
+	". [",
+	".]",
+	"“...",
+	"...”",
+	"‘...",
+	"...’",
+	'"...',
+	'..."',
+	"“…",
+	"…”",
+	"‘…",
+	"…’",
+	".",
+	",",
+	" .",
+	" ,",
+	". ",
+	", ",
+	"“",
+	"”",
+	" “",
+	" ”",
+	"“ ",
+	"” ",
+	"'",
+	" '",
+	"' ",
+	"`",
+	"‘",
+	"’",
+	" ‘",
+	" ’",
+	"‘ ",
+	"’ ",
+	".”",
+	".’",
+	".‘",
+	".'",
+	'."',
+	'".',
+	'"',
+	' "',
+	'" ',
+	"—",
+	" —",
+	"— ",
+	"!",
+	" !",
+	"! ",
+	"?",
+	" ?",
+	"? ",
+];
 
 const wordPlusLower = (m) => {
 	return [m.substring(0, m.length - 2), m[m.length - 1].toLowerCase()].join(
@@ -51,8 +95,9 @@ function hasReadableLetters(text) {
 
 var patterns = [
 	//  [/ /ig," "],
-  [/\([a-z]*\) *$/gmi, "\n"],
+	[/\([a-z]*\) *$/gim, "\n"],
 	[/▶/g, "-->"],
+	[/\(TN:[^\(]*\)/gm, ""],
 	[/Hmph/g, "Humph"],
 	[/([^a-z]*)PP([^a-z])/g, "$1player points$2"],
 	[/([^a-z]*)([Pp])ow([^a-z])/g, "$1$2owh$3"],
@@ -126,7 +171,13 @@ function unMultiSpan() {
 
 function dealWithNoReader(ps) {
 	console.log("dealWithNoReader");
+	let delrest = false;
+
 	for (let v of ps) {
+    if (delrest) {
+      console.log(v);
+      v.remove();
+    }
 		v.innerText = regexDealWith(v.innerText);
 		if (v.children.length == 1 && v.children[0].outerHTML == "<br>")
 			continue;
@@ -139,7 +190,12 @@ function dealWithNoReader(ps) {
 			console.log(v.innerText);
 		}
 	}
+	if (v.innerText == "Author Note:" || v.innerText == "Author Notes:") {
+		delrest = true;
+    v.remove();
+	}
 }
+
 function delAll(na) {
 	var all_na = document.getElementsByTagName(na);
 	for (let i = all_na.length; i > 0; i--) {
@@ -171,21 +227,24 @@ function makeButton() {
 	bton0.setAttribute("id", "Toggle auto-next");
 	return bton0;
 }
-function changeSpanText(el,nxit){
-  for (let e of el){
-      let fc = e.lastChild;
-      let ssp = nxit ? sspause.cloneNode() : ssplay.cloneNode()
-      e.replaceChild(ssp,fc);
-      //console.log(e);
-  }
+function changeSpanText(el, nxit) {
+	for (let e of el) {
+		let fc = e.lastChild;
+		let ssp = nxit ? sspause.cloneNode() : ssplay.cloneNode();
+		e.replaceChild(ssp, fc);
+		//console.log(e);
+	}
 }
 function getDocHeight() {
-  var D = document;
-  return Math.max(
-      D.body.scrollHeight, D.documentElement.scrollHeight,
-      D.body.offsetHeight, D.documentElement.offsetHeight,
-      D.body.clientHeight, D.documentElement.clientHeight
-  );
+	var D = document;
+	return Math.max(
+		D.body.scrollHeight,
+		D.documentElement.scrollHeight,
+		D.body.offsetHeight,
+		D.documentElement.offsetHeight,
+		D.body.clientHeight,
+		D.documentElement.clientHeight
+	);
 }
 
 // t = {}
