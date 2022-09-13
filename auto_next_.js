@@ -51,6 +51,7 @@ function hasReadableLetters(text) {
 
 var patterns = [
 	//  [/ /ig," "],
+	[/\([A-z]*\) *\n/g, " \n"],
 	[/▶/g, "-->"],
 	[/Hmph/g, "Humph"],
 	[/([^a-z]*)PP([^a-z])/g, "$1player points$2"],
