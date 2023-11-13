@@ -27,6 +27,7 @@ var patternsRegex = [
     makePattern("Xi"),
     makePattern("Wa"),
     makePattern("Mi"),
+    makePattern("Mo"),
     makePattern("Xu"),
     makePattern("Ke"),
     makePattern("ke"),
