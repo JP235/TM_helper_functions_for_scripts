@@ -1,7 +1,7 @@
 var patternsRegex = [
     //  [/ /ig," "],
      [/The Author's POV/g, ""],
-     [/^Chapter (\d{1,3})(.*$)/g, "$1 $2"],
+     [/^Chapter (\d{1,3})(.*$)/g, ""],
      [/MK-3/g, "Mk3"],
      [/MK-III/g, "Mk3"],
      [/MK. III/g, "Mk3"],
@@ -136,7 +136,6 @@ var patternsRegex = [
     [/-Il/gi, "il"],
     [/-Ho/g, "ho"],
     [/-Ha/g, "ha"],
-    [/([^\*a-z]*)\*([^\*a-z]*)/gm, "$1'$2"],
     [/Mi-[A-Z]/g, (m) => wordPlusLower(m)],
     [/Il-[A-Z]/g, (m) => wordPlusLower(m)],
     [/Min-[A-Z]/g, (m) => wordPlusLower(m)],
@@ -146,6 +145,11 @@ var patternsRegex = [
     [/MB. Freeman/g, "Freeman"],
     [/Gleason. Dodge/g, "Gleason Dodge"],
     [/Aikenseth/g, "Aiken"],
+    [/([^\*])\*+([^\*]*)/gm, "$1'$2"],
+    [/([^a-zA-Z]*)Tha([^a-z])/g, "$1Dha$2"],
+    [/([^a-zA-Z])tha([^a-z])/g, "$1dha$2"],
+    
+    
 ];
 var patternsIncludes = [
     "broken links, non-standard content",
@@ -156,7 +160,7 @@ var patternsIncludes = [
     "you could also subscribe",
     "AzureOrchid92",
     "Atlas Studios",
-    "You’re reading on NovelFull"
+    "You’re reading on NovelFull","For more, visit"
     
 ]
 var patternsStarts = [
